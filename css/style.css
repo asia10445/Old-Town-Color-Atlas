@@ -1,5 +1,5 @@
 /* =========================================================================
- * 中興新村省府生活色譜 - 全域樣式表
+ * 舊城時光色譜 - 全域樣式表
  * ========================================================================= */
 
 :root {
@@ -46,16 +46,14 @@ body {
 
 /* 響應式主容器 */
 .app-container {
-    width: 393px;
-    /* 鎖定畫布外框為 393 */
-    height: 852px;
-    /* 鎖定畫布外框為 852 */
+    width: 100%;
+    max-width: 1440px; /* 電腦版最大寬度 */
+    min-width: 320px;
+    height: 100dvh; /* 使用 dvh 適應手機瀏覽器 */
     background-color: var(--color-time-white);
     position: relative;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
-    /* 桌面瀏覽時的裝置陰影 */
-    overflow: hidden;
-    /* Clip Content 讓超出範圍直接裁切隱藏 */
+    box-shadow: 0 0 20px rgba(0,0,0,0.08); /* 桌面瀏覽時的裝置陰影 */
+    overflow: hidden; /* Clip Content 讓超出範圍直接裁切隱藏 */
 }
 
 /* =========================================================================
@@ -63,49 +61,49 @@ body {
  * ========================================================================= */
 .title-32-48 {
     font-family: 'Noto Serif TC', serif;
-    font-size: 32px;
-    line-height: 48px;
+    font-size: clamp(32px, 3vw + 16px, 48px);
+    line-height: 1.5;
     font-weight: 700;
-    /* BOLD */
 }
 
-/* 店家名稱 Noto Sans TC Medium 字級18 行距27 */
+/* 店家名稱 */
 .store-name {
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 500;
-    font-size: 18px;
-    line-height: 27px;
+    font-size: clamp(16px, 1.5vw + 12px, 24px);
+    line-height: 1.5;
 }
 
-/* 標題-24/36 Noto Serif TC BOLD 字級24 行距36 */
+/* 標題-24/36 */
 .title-24-36 {
     font-family: 'Noto Serif TC', serif;
-    font-size: 24px;
-    line-height: 36px;
+    font-size: clamp(24px, 2vw + 16px, 36px);
+    line-height: 1.5;
     font-weight: 700;
 }
 
-/* 內文-14/21 Noto Sans TC Regular 字級14 行距21 */
+/* 內文-14/21 */
 .body-14-21 {
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
+    font-size: clamp(14px, 1vw + 10px, 18px);
+    line-height: 1.5;
 }
 
-/* 內文-12/18 Noto Sans TC Regular 字級12 行距18 */
+/* 內文-12/18 */
 .body-12-18 {
+    font-family: 'Noto Sans TC', sans-serif;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: clamp(12px, 0.8vw + 9px, 16px);
+    line-height: 1.5;
 }
 
-/* 內文-16/24 Noto Sans TC Regular 字級16 行距24 */
+/* 內文-16/24 */
 .body-16-24 {
-    font-size: 16px;
-    line-height: 24px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: clamp(16px, 1vw + 12px, 22px);
+    line-height: 1.5;
     font-weight: 400;
-    /* Regular */
 }
 
 /* =========================================================================
@@ -161,24 +159,26 @@ body {
     border-radius: 0;
 }
 
+/* 瀑布流捲動容器 */
+.masonry-scroll-wrapper {
+    height: 100%;
+    overflow-y: auto;
+    padding: 140px 20px 120px 20px;
+}
+
 /* 瀑布流容器 (雙欄 Flexbox) */
 .masonry-container {
     display: flex;
     justify-content: space-between;
-    gap: 12px;
-    padding: 20px 20px 120px 20px;
-    /* 左、右間距改為 20，頂部由 y20 開始 */
-    height: 100%;
-    overflow-y: auto;
-    /* 讓瀑布流區塊自己負責捲動，保持其餘 UI 固定 */
+    gap: 16px;
+    height: auto;
 }
 
 .masonry-col {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     flex: 1;
-    /* 均分左右可用寬度 */
 }
 
 /* 單張色卡 */
@@ -192,6 +192,7 @@ body {
     /* 確保沒有外框線 */
     outline: none;
     /* 確保沒有外框線 */
+    width: 100%;
 }
 
 /* 依照規則設定兩種卡片比例 */
@@ -400,6 +401,9 @@ body {
     flex-direction: column;
     gap: 0;
     /* 卡片完全緊貼，沒有空隙 */
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .info-card {
@@ -418,7 +422,7 @@ body {
 }
 
 .section-title {
-    font-size: 14px;
+    font-size: clamp(14px, 1vw + 10px, 18px);
     font-weight: 700;
     margin-bottom: 12px;
 }
@@ -540,15 +544,15 @@ body {
 
 .share-form {
     width: 100%;
-    max-width: none;
-    /* W滿版 */
+    max-width: 600px;
+    /* W滿版 -> 改為 600px 置中 */
     margin: 0 auto;
     color: #111;
 }
 
 .form-main-title {
     font-family: 'Noto Serif TC', serif;
-    font-size: 24px;
+    font-size: clamp(24px, 2vw + 16px, 32px);
     font-weight: 700;
     text-align: center;
     margin-bottom: 24px;
@@ -560,7 +564,7 @@ body {
 
 .form-section-title {
     font-family: 'Noto Serif TC', serif;
-    font-size: 20px;
+    font-size: clamp(20px, 1.5vw + 14px, 24px);
     font-weight: 700;
     text-align: center;
     margin-bottom: 16px;
@@ -584,7 +588,7 @@ body {
 
 .form-group label {
     font-weight: 700;
-    font-size: 14px;
+    font-size: clamp(14px, 1vw + 10px, 16px);
     margin-bottom: 4px;
 }
 
@@ -595,7 +599,7 @@ body {
     border: none;
     padding: 8px 12px;
     font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
+    font-size: clamp(14px, 1vw + 10px, 16px);
     border-radius: 4px;
 }
 
@@ -616,7 +620,7 @@ body {
     border: 1px solid #111;
     font-family: 'Noto Sans TC', sans-serif;
     font-weight: 700;
-    font-size: 14px;
+    font-size: clamp(14px, 1vw + 10px, 16px);
     cursor: pointer;
     margin-top: 16px;
 }

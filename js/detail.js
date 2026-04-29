@@ -1,5 +1,5 @@
 /**
- * 中興新村省府生活色譜 - 詳情頁資料處理
+ * 舊城時光色譜 - 詳情頁資料處理
  */
 document.addEventListener('DOMContentLoaded', async () => {
     // 取得網址列參數的 ID
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log("成功讀取店家資料", data);
             
             // 更新網頁標題 (Tab)
-            document.title = `${data.name} - 中興新村省府生活色譜`;
+            document.title = `${data.name} - 舊城時光色譜`;
 
             // 更新 Header 文字
             const titleElem = document.querySelector('.app-container.detail-view .store-name');
@@ -152,10 +152,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                             
                             // 只有在填入網址時才產生圖片區塊
                             if (url) {
-                                const photoPlaceholder = document.createElement('div');
-                                photoPlaceholder.className = 'photo-placeholder';
-                                photoPlaceholder.style.backgroundImage = `url('${url}')`;
-                                photoCard.appendChild(photoPlaceholder);
+                                const photoImg = document.createElement('img');
+                                photoImg.src = url;
+                                photoImg.alt = "時光故事照片";
+                                photoImg.style.width = '100%';
+                                photoImg.style.height = 'auto';
+                                photoImg.style.display = 'block';
+                                photoImg.style.borderRadius = '8px';
+                                photoImg.style.marginBottom = '12px';
+                                photoCard.appendChild(photoImg);
                             }
                             
                             // 只要有文字就產生文字區塊 (即使沒有圖片也可以純放文字當作故事佈局)

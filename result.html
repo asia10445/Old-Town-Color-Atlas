@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>採集結果 - 中興新村省府生活色譜</title>
+    <title>採集結果 - 舊城時光色譜</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="./assets/icons/app-logo.svg">
 
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="採集結果 - 中興新村省府生活色譜">
+    <meta property="og:title" content="採集結果 - 舊城時光色譜">
     <meta property="og:description" content="記錄職人與建築留下的視覺痕跡，並將這些元素轉化為色彩與圖騰。">
     <meta property="og:image" content="./assets/images/og-image.jpg">
     <meta property="og:type" content="website">
@@ -48,7 +48,7 @@
             <div
                 style="flex: 1; display: flex; align-items: center; justify-content: center; position: relative; padding: 24px 48px 24px 32px;">
                 <!-- 照片卡 -->
-                <div style="width: 100%; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <div style="width: 100%; max-width: 600px; margin: 0 auto; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
 
                     <!-- 影像本體 (利用 JS 模擬直式與橫式載入，並加上 crossorigin 協助 Canvas 合成) -->
                     <img id="result-photo" crossorigin="anonymous"
@@ -79,12 +79,12 @@
             </div>
 
             <!-- 標本採集完成 純文字 -->
-            <div class="body-16-24" style="text-align: center; font-weight: 700; color: #2D3748; padding: 0 32px 24px 32px;">
+            <div class="body-16-24" style="text-align: center; font-weight: 700; color: #2D3748; padding: 0 32px 24px 32px; max-width: 600px; margin: 0 auto; width: 100%;">
                 標本採集完成
             </div>
 
             <!-- 顏色自動萃取分析列表 -->
-            <div id="extracted-colors" style="padding: 0 32px 24px 32px; display: flex; flex-direction: column; gap: 16px;">
+            <div id="extracted-colors" style="padding: 0 32px 24px 32px; display: flex; flex-direction: column; gap: 16px; max-width: 600px; margin: 0 auto; width: 100%;">
                 <!-- 這些顏色將由 JS 根據照片自動切換對應色系 -->
             </div>
 

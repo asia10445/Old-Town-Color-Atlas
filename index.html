@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Colors of Zhongxing - 中興新村省府生活色譜</title>
+    <title>old-city-color-chronicle - 舊城時光色譜</title>
     <!-- 引入字體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
     <link rel="icon" type="image/svg+xml" href="./assets/icons/app-logo.svg">
 
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="中興新村省府生活色譜">
+    <meta property="og:title" content="舊城時光色譜">
     <meta property="og:description" content="記錄職人與建築留下的視覺痕跡，並將這些元素轉化為色彩與圖騰。">
     <meta property="og:image" content="./assets/images/og-image.jpg">
     <meta property="og:type" content="website">
@@ -26,13 +26,13 @@
     <div class="app-container">
         <!-- 頂部 Header 導覽列也套用玻璃陰影 -->
         <header class="app-header glass-effect">
-            <h1 class="title-32-48">中興新村色譜</h1>
+            <h1 class="title-32-48">舊城時光色譜</h1>
         </header>
 
-        <!-- 瀑布流主內容容器 (拆分為左右雙欄) -->
-        <main class="masonry-container" id="masonry-container">
-            <div class="masonry-col" id="masonry-col-left"></div>
-            <div class="masonry-col" id="masonry-col-right"></div>
+        <!-- 瀑布流主內容容器 (改為純 CSS columns 響應式) -->
+        <main class="masonry-scroll-wrapper" id="masonry-scroll-wrapper">
+            <div class="masonry-container" id="masonry-container">
+            </div>
         </main>
 
         <!-- 右側浮動導覽列 -->
@@ -57,10 +57,10 @@
         <div id="info-modal" class="modal-overlay hidden">
             <!-- 面板無色，直接套用玻璃陰影 -->
             <div class="modal-panel glass-effect">
-                <h2 class="store-name" style="text-align:center; margin-bottom: 24px;">關於中興新村省府生活色譜</h2>
+                <h2 class="store-name" style="text-align:center; margin-bottom: 24px;">關於舊城時光色譜</h2>
                 <div class="body-12-18" style="display: flex; flex-direction: column; gap: 16px;">
                     <p style="font-weight:700;">「時光的顏色，是有觸感的。」</p>
-                    <p>我們走進中興新村，記錄職人與建築留下的視覺痕跡，並將這些元素轉化為色彩與圖騰。</p>
+                    <p>我們走進台中舊城，記錄職人與建築留下的視覺痕跡，並將這些元素轉化為色彩與圖騰。</p>
                     <div style="line-height:1.6;">
                         <p>圖騰組成邏輯</p>
                         <p>核心紋理 | 材料的肌理流動</p>
@@ -70,7 +70,7 @@
                     <div style="line-height:1.6;">
                         <p>採集單位：HUA</p>
                         <p>更新日期：2026.04.07</p>
-                        <p>地點：中興新村標本庫</p>
+                        <p>地點：台中舊城標本庫</p>
                     </div>
                 </div>
             </div>
@@ -88,11 +88,11 @@
             <!-- 將面板擴充為滿版捲動區 -->
             <div class="modal-panel glass-effect full-modal-scroll">
                 <div class="share-form">
-                    <h2 class="form-main-title">分享一間你喜歡的中興新村店家</h2>
+                    <h2 class="form-main-title">分享一間你喜歡的台中舊城店家</h2>
 
                     <div class="body-12-18 form-subtitle">
                         <p style="font-weight: 700; margin-bottom: 8px;">我們正在蒐集那些值得被記住的地方</p>
-                        <p>不用登入，也可以匿名投稿，你的分享，可能會變成下一張中興新村的色譜。</p>
+                        <p>不用登入，也可以匿名投稿，你的分享，可能會變成下一張台中舊城的色譜。</p>
                     </div>
 
                     <h3 class="form-section-title">店家基本資訊</h3>
@@ -146,7 +146,7 @@
                         <input type="checkbox" id="terms-agree"
                             onchange="document.getElementById('share-submit-btn').disabled = !this.checked; document.getElementById('share-submit-btn').style.opacity = this.checked ? '1' : '0.4';">
                         <label for="terms-agree" class="body-12-18"
-                            style="font-weight: 400; line-height: 1.5;">我同意本照片與資料可用於《中興新村省府生活色譜》之研究、展示與設計用途。</label>
+                            style="font-weight: 400; line-height: 1.5;">我同意本照片與資料可用於《舊城時光色譜》之研究、展示與設計用途。</label>
                     </div>
 
                     <div style="text-align: center; margin-top: 32px;">

@@ -1,5 +1,5 @@
 /**
- * 中興新村省府生活色譜 - 首頁瀑布流互動與資料處理
+ * 舊城時光色譜 - 首頁瀑布流互動與資料處理
  */
 
 const supabaseUrl = 'https://ccqcmzsopezfmmmvlqlr.supabase.co';
@@ -7,36 +7,45 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const leftCol = document.getElementById('masonry-col-left');
-    const rightCol = document.getElementById('masonry-col-right');
+    const container = document.getElementById('masonry-container');
+
+    let currentCols = getColCount();
+
+    function getColCount() {
+        const w = window.innerWidth;
+        if (w >= 1200) return 5;
+        if (w >= 900) return 4;
+        if (w >= 600) return 3;
+        return 2;
+    }
 
     // 抽離出「渲染卡片」的邏輯，方便重複呼叫
     function renderCards(dataArray) {
-        // 先清空畫面
-        leftCol.innerHTML = '';
-        rightCol.innerHTML = '';
+        container.innerHTML = '';
 
         if (!dataArray || dataArray.length === 0) {
-            leftCol.innerHTML = '<div class="body-16-24" style="padding: 32px 16px; color: #888; text-align: center; grid-column: span 2;">尚無色譜資料</div>';
+            container.innerHTML = '<div class="body-16-24" style="padding: 32px 16px; color: #888; text-align: center; width: 100%;">尚無色譜資料</div>';
             return;
+        }
+
+        const cols = [];
+        for (let i = 0; i < currentCols; i++) {
+            const col = document.createElement('div');
+            col.className = 'masonry-col';
+            container.appendChild(col);
+            cols.push(col);
         }
 
         dataArray.forEach((data, index) => {
             const card = document.createElement('div');
 
-            const isLeft = index % 2 === 0;
-            let isTall = false;
-            if (isLeft) {
-                isTall = (index / 2) % 2 === 0;
-            } else {
-                isTall = ((index - 1) / 2) % 2 !== 0;
-            }
+            // 簡單的隨機高低判定 (使用 index 來確保重新渲染時比例固定)
+            const isTall = index % 3 === 0;
 
             card.className = `color-card ${isTall ? 'ratio-1-1-5' : 'ratio-1-1'}`;
 
             if (data.image) {
                 card.style.backgroundImage = `url('${data.image}')`;
-                // 為了讓 4500x3000 大圖在瀑布流卡片中呈現最佳美感，使用 cover 填滿並置中
                 card.style.backgroundSize = 'cover'; 
                 card.style.backgroundPosition = 'center';
                 card.style.backgroundRepeat = 'no-repeat';
@@ -61,20 +70,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             card.style.cursor = 'pointer';
             card.addEventListener('click', () => {
-                // 將商店的 ID 帶入網址列參數中，傳給 detail.html
                 window.location.href = `detail.html?id=${data.id}`;
             });
 
-            if (isLeft) {
-                leftCol.appendChild(card);
-            } else {
-                rightCol.appendChild(card);
-            }
+            // 依序分發到各個欄位
+            cols[index % currentCols].appendChild(card);
         });
     }
 
+    // 監聽視窗縮放以動態調整欄數
+    window.addEventListener('resize', () => {
+        const newCols = getColCount();
+        if (newCols !== currentCols) {
+            currentCols = newCols;
+            if (window.allShopsData) {
+                renderCards(window.allShopsData);
+            }
+        }
+    });
+
     // 載入中提示
-    leftCol.innerHTML = '<div class="body-16-24" style="padding: 32px 16px; color: #888; text-align: center;">載入色譜中...</div>';
+    container.innerHTML = '<div class="body-16-24" style="padding: 32px 16px; color: #888; text-align: center; width: 100%;">載入色譜中...</div>';
 
     try {
         const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
@@ -83,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { data, error } = await supabase.from('shops').select('*');
         if (error) {
             console.warn('Supabase 資料庫連線或權限錯誤：', error.message);
-            leftCol.innerHTML = '<div class="body-16-24" style="padding: 32px 16px; color: #888; text-align: center;">資料載入失敗</div>';
+            container.innerHTML = '<div class="body-16-24" style="padding: 32px 16px; color: #888; text-align: center;">資料載入失敗</div>';
         } else if (data && data.length > 0) {
             console.log('成功從 Supabase 取得店家資料！', data);
             
@@ -100,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (err) {
         console.warn('Supabase SDK 載入或連線失敗', err);
-        leftCol.innerHTML = '<div class="body-16-24" style="padding: 32px 16px; color: #888; text-align: center;">資料載入失敗</div>';
+        container.innerHTML = '<div class="body-16-24" style="padding: 32px 16px; color: #888; text-align: center;">資料載入失敗</div>';
     }
 
     // 資訊彈窗邏輯
