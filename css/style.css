@@ -38,10 +38,18 @@ body {
     color: var(--text-color);
     display: flex;
     justify-content: center;
-    align-items: center;
-    /* 為了方便模擬手機直式螢幕，上下方均等置中 */
+    align-items: flex-start;
+    /* 手機預設靠頂對齊，避免瀏覽器收合網址列時上方出現空白 */
     min-height: 100vh;
-    /* 移除 overflow-x: hidden 確保視窗操作正準 */
+    overscroll-behavior: none;
+    /* 防止下拉時露出背景空白 */
+}
+
+/* 桌面寬螢幕時才垂直置中，模擬手機框視覺 */
+@media (min-width: 1024px) {
+    body {
+        align-items: center;
+    }
 }
 
 /* 響應式主容器 */
